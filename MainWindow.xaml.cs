@@ -44,7 +44,7 @@ namespace PlaySound
 
                     __kinect.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
 
-                    __kinect.DepthStream.Enable();
+                    __kinect.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
                     __kinect.SkeletonStream.Enable();
                     // init the Depth Stream, with Near Mode Enabled
                     //KinectSensor.DepthStream.Enable( DepthImageFormat.Resolution640x480Fps30 );
@@ -77,34 +77,91 @@ namespace PlaySound
         void _sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
 
-            Vector clh = new Vector();
-            // clh = calibrated left hand
+            Vector coolh = new Vector();
+            // coolh = coordinates left hand
             // in vector i will save position of left hand
 
+
+            short[] DataDepth;
+            int HandDepth;
+
+            byte[] RbgVideo;
+
+
             using (SkeletonFrame skeletonFrameData = e.OpenSkeletonFrame())
+            // the using above will detect a skeleton; the first one.
             {
-                if (skeletonFrameData ==null)
+                if (skeletonFrameData == null)
+                {
+                    return;
+                }
+                skeletonFrameData.CopySkeletonDataTo(allSkeletons);
+
+                Skeleton first = (from s in allSkeletons
+                                  where s.TrackingState == SkeletonTrackingState.Tracked
+                                  select s).FirstOrDefault();
+
+                if (first == null)
+                {
+                    return;
+                }
+
+                // the var = when i ask for the position of a joint the kinect will return a value btwn -1 and 1, for x and y
+                // the fct does take those values and give the actual coordinates in comparison to the video stream.
+
+                var pct = __kinect.MapSkeletonPointToColor
+
+                (first.Joints[JointType.HandLeft].Position, ColorImageFormat.RgbResolution640x480Fps30
+
+                );
+
+                coolh.X = pct.X;
+                coolh.Y = pct.Y;
+
+                // the var = when i ask for the position of a joint the kinect will return a value btwn -1 and 1, for x and y
+                // the fct does take those values and give the actual coordinates in comparison to the video stream.
+
+
+
+            }
+            // the using above will detect a skeleton; the first one.
+
+            //next up we detect the depth of field, and then take the depth of the hand so we can only work with that, not with the whole img
+
+            using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
+            {
+                if (depthFrame==null)
+                {
+                    return;
+                }
+
+               DataDepth = new short [depthFrame.PixelDataLength];
+               depthFrame.CopyPixelDataTo(DataDepth);
+            }
+            //this above took a frame with depth
+
+            HandDepth = DataDepth[(int)coolh.Y * 640 + (int)coolh.X] >> DepthImageFrame.PlayerIndexBitmaskWidth;
+
+
+            //magic cast = transforms a variable on the spot (from int to double int for example.)
+
+
+            using (ColorImageFrame colorFrame =e.OpenColorImageFrame())
+
+            {
+                if (colorFrame==null)
                 {
                     return;
 
-                    skeletonFrameData.CopySkeletonDataTo(allSkeletons)
-
-                        Skeleton first = ( from s in allSkeletons
-                                           where s.TrackingState == SkeletonTrackingState.Tracked
-                                           select s).FirstOrDefault();
-
+                    RbgVideo = new byte[colorFrame.PixelDataLength];
+                    colorFrame.CopyPixelDataTo(RbgVideo);
                 }
             }
-            
-            // the using above will detect a skeleton; the first one.
 
-
-           
-
-
-
-
-
+            int RedArea = 0;
+                int YellowArea =0;
+            //cati pixeli de culoarea aia s-au gasit
+            //how many pixels of that color are found
 
         }
 
