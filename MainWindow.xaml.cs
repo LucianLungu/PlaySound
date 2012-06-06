@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Kinect;
 
 namespace PlaySound
 {
@@ -19,6 +20,45 @@ namespace PlaySound
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        KinectSensor __kinect;
+
+        bool closing = false;
+        const int skeletonCount = 6;
+        Skeleton[] allSkeletons = new Skeleton[skeletonCount];
+
+
+
+        //setup kinect
+        void SetupKinect()
+        {
+            //get first kinect sensor
+            if (KinectSensor.KinectSensors.Count > 0)
+            {
+                __kinect = KinectSensor.KinectSensors[0];
+
+                if (__kinect.Status == KinectStatus.Connected)
+                {
+                    //start the video stream only if the program in run from the
+                    //Calibration Menu
+
+                    __kinect.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
+
+                    __kinect.DepthStream.Enable();
+                    __kinect.SkeletonStream.Enable();
+                    // init the Depth Stream, with Near Mode Enabled
+                    //KinectSensor.DepthStream.Enable( DepthImageFormat.Resolution640x480Fps30 );
+                    //KinectSensor.DepthStream.Range = DepthRange.Near;
+
+                    __kinect.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>(_sensor_AllFramesReady);
+
+                    __kinect.Start();
+                }
+            }
+        }
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,10 +68,55 @@ namespace PlaySound
             ////Creates a sound player with the mentioned file. You can even load a stream in to this class
             //    aSoundPlayer.Play();  //Plays the sound in a new thread
 
-       
+
+            SetupKinect();
 
         }
 
+
+        void _sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
+        {
+
+            Vector clh = new Vector();
+            // clh = calibrated left hand
+            // in vector i will save position of left hand
+
+            using (SkeletonFrame skeletonFrameData = e.OpenSkeletonFrame())
+            {
+                if (skeletonFrameData ==null)
+                {
+                    return;
+
+                    skeletonFrameData.CopySkeletonDataTo(allSkeletons)
+
+                        Skeleton first = ( from s in allSkeletons
+                                           where s.TrackingState == SkeletonTrackingState.Tracked
+                                           select s).FirstOrDefault();
+
+                }
+            }
+            
+            // the using above will detect a skeleton; the first one.
+
+
+           
+
+
+
+
+
+
+        }
+
+
+       
+        
+        
+        
+        
+        
+        
+        
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             System.Media.SoundPlayer
@@ -178,6 +263,11 @@ namespace PlaySound
             System.Media.SoundPlayer
              aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\G5arp.wav");
             aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            __kinect.Stop();
         }
 
 
