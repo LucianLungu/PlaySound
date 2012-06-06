@@ -103,6 +103,83 @@ namespace PlaySound
             aSoundPlayer.Play();  //Plays the sound in a new thread
         }
 
+        private void button11_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+                aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\Fm.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button12_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+                aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\Gm.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button13_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+                aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\Cm.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button14_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+                aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\B.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button15_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+               aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\A5arp.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button16_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+             aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\B5arp.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button17_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+             aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\C5arp.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button18_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+             aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\D5arp.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button19_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+             aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\E5arp.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button20_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+             aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\F5arp.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
+        private void button21_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer
+             aSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Luke\Desktop\chords\PowerChords\G5arp.wav");
+            aSoundPlayer.Play();  //Plays the sound in a new thread
+        }
+
 
 
 
