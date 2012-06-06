@@ -73,7 +73,14 @@ namespace PlaySound
 
         }
 
+        bool AE(int x, int y, int e)
+        {
+            return Math.Abs(x - y) < e;
+        }
 
+        // boolean meaning T or F value
+        //
+        //MAYBE to be played with
         void _sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
 
@@ -152,16 +159,64 @@ namespace PlaySound
                 if (colorFrame==null)
                 {
                     return;
+                    
+                }
 
                     RbgVideo = new byte[colorFrame.PixelDataLength];
                     colorFrame.CopyPixelDataTo(RbgVideo);
-                }
+                
             }
 
             int RedArea = 0;
                 int YellowArea =0;
             //cati pixeli de culoarea aia s-au gasit
             //how many pixels of that color are found
+
+
+                for (int i = -50; i < 51; i++)
+                {
+             
+
+                    if (coolh.Y +i <0 || coolh.Y +i > 480)
+                    {
+                        continue;
+                    }
+
+                    int offset = ((int)(coolh.Y - 1) * 640);
+
+                 for (int j = -50; j < 51; j++)
+                    {
+                        if (coolh.X+j <0||coolh.X+j>640)
+                        {
+                            continue;
+                        }
+                        const int redin = 0;
+                        const int greenin = 0;
+                        const int bluein = 0;
+                   
+                     //redin, greenin, bluein are indexes; offsets 
+                        if (AE(DataDepth[offset + (int)coolh.X + j] >> DepthImageFrame.PlayerIndexBitmaskWidth, HandDepth, 50))
+                        {
+                            int coloroffset = (offset + (int)coolh.X * 4);
+
+                                //*4 because every pixel is composed of 4 pixels: RGB and transparency
+
+                            if (AE (RbgVideo[coloroffset+redin], 255, 20) && 
+                                AE (RbgVideo[coloroffset+greenin], 0, 20) && 
+                                    AE (RbgVideo[coloroffset+bluein], 0, 20))
+
+                            {
+                                RedArea++;
+                            }
+                        
+                            //do that if above for each color that i want; this one is for red.
+
+                        }
+
+                    }
+
+
+                }
 
         }
 

@@ -1,0 +1,13 @@
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\MainWindow.baml
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\MainWindow.g.cs
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\App.g.cs
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\PlaySound_MarkupCompile.cache
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\PlaySound.g.resources
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\PlaySound.Properties.Resources.resources
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\bin\Release\PlaySound.exe
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\bin\Release\PlaySound.pdb
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\PlaySound.exe
+C:\Users\Luke\Desktop\c# projects\PlaySound\PlaySound\obj\x86\Release\PlaySound.pdb
